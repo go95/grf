@@ -24,14 +24,14 @@ namespace grf {
 // zero division errors etc!
 // weight
 
-bool InstrumentalRelabelingStrategy::relabel(
+bool CustomRelabelingStrategy::relabel(
     const std::vector<size_t>& samples,
     const Data& data,
     std::vector<double>& responses_by_sample) const {
 
   // Change instrument to proper cluster
   size_t num_samples = samples.size();
-  size_t number_of_outcomes = 2; // generalize // you CAN have custom prediction length
+  size_t number_of_outcomes = 2; // generalize // you CAN have custom prediction length // or query
   double total_treatment = 0.0;
   double total_effect = 0.0;
   std::vector<double> effects(number_of_outcomes);
