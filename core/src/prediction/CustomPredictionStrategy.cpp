@@ -14,6 +14,8 @@
   You should have received a copy of the GNU General Public License
   along with grf. If not, see <http://www.gnu.org/licenses/>.
  #-------------------------------------------------------------------------------*/
+#include <vector>
+#include <cmath>
 
 #include "CustomPredictionStrategy.h"
 
@@ -30,7 +32,6 @@ std::vector<double> CustomPredictionStrategy::predict(size_t sample,
 
   size_t num_samples = samples.size();
   double total_treatment = 0.0;
-  double effect_base = 0.0;
   size_t number_of_outcomes = 2; // generalize // you CAN have custom prediction length // or query
   double total_effect = 0.0;
   std::vector<double> effects(number_of_outcomes);
