@@ -92,14 +92,14 @@ marginal_forest <- function(X, Y, W, Z,
                                instrument = Z - Z.hat, sample.weights = sample.weights)
   ci.group.size <- 1
 
-  forest <- custom_train(
+  forest <- marginal_train(
     data$train.matrix, data$sparse.train.matrix, data$outcome.index, data$treatment.index, 
     data$instrument.index, mtry, num.trees, min.node.size,
     sample.fraction, honesty, honesty.fraction, honesty.prune.leaves, ci.group.size, alpha,
     imbalance.penalty, clusters, samples.per.cluster, num.threads, compute.oob.predictions, seed
   )
 
-  class(forest) <- c("custom_forest", "grf")
+  class(forest) <- c("marginal_forest", "grf")
   forest[["X.orig"]] <- X
   forest[["Y.orig"]] <- Y
   forest[["has.missing.values"]] <- has.missing.values
@@ -148,13 +148,13 @@ predict.marginal_forest <- function(object, newdata = NULL, num.threads = NULL, 
   if (!is.null(newdata)) {
     validate_newdata(newdata, X)
     data <- create_train_matrices(newdata)
-    custom_predict(
+    marginal_predict(
       forest.short, train.data$train.matrix, train.data$sparse.train.matrix,
       train.data$outcome.index, train.data$treatment.index, train.data$instrument.index,
       data$train.matrix, data$sparse.train.matrix, num.threads
     )
   } else {
-    custom_predict_oob(forest.short, train.data$train.matrix, train.data$sparse.train.matrix,
+    marginal_predict_oob(forest.short, train.data$train.matrix, train.data$sparse.train.matrix,
       train.data$outcome.index, train.data$treatment.index, train.data$instrument.index,
       num.threads)
   }
