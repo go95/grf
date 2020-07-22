@@ -30,17 +30,18 @@ std::vector<double> CustomPredictionStrategy::predict(size_t sample,
     const Data& train_data,
     const Data& data) const {
 
-  size_t num_samples = samples.size();
+  size_t num_samples = weights_by_sample.size();
   double total_treatment = 0.0;
   size_t number_of_outcomes = 2; // generalize // you CAN have custom prediction length // or query
   double total_effect = 0.0;
   std::vector<double> effects(number_of_outcomes);
 
-  for (size_t sample : samples) {
+  for (const auto& entry : weights_by_sample) {
     total_treatment += data.get_treatment(sample);
   }
 
-  for (size_t sample : samples) {
+  for (const auto& entry : weights_by_sample) {
+    size_t sample = entry.first;
     double denominator = (
       data.get_treatment(sample) * total_treatment -
       (num_samples - total_treatment) * (1 - data.get_treatment(sample))
