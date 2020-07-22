@@ -28,7 +28,7 @@
 using namespace grf;
 
 // [[Rcpp::export]]
-Rcpp::List custom_train(Rcpp::NumericMatrix train_matrix,
+Rcpp::List marignal_train(Rcpp::NumericMatrix train_matrix,
                         Eigen::SparseMatrix<double> sparse_train_matrix,
                         size_t outcome_index,
                         size_t treatment_index,
@@ -69,7 +69,7 @@ Rcpp::List custom_train(Rcpp::NumericMatrix train_matrix,
 }
 
 // [[Rcpp::export]]
-Rcpp::NumericMatrix custom_predict(Rcpp::List forest_object,
+Rcpp::NumericMatrix marignal_predict(Rcpp::List forest_object,
                                    Rcpp::NumericMatrix train_matrix,
                                    Eigen::SparseMatrix<double> sparse_train_matrix,
                                    size_t outcome_index,
@@ -94,7 +94,7 @@ Rcpp::NumericMatrix custom_predict(Rcpp::List forest_object,
 }
 
 // [[Rcpp::export]]
-Rcpp::NumericMatrix custom_predict_oob(Rcpp::List forest_object,
+Rcpp::NumericMatrix marignal_predict_oob(Rcpp::List forest_object,
                                        Rcpp::NumericMatrix train_matrix,
                                        Eigen::SparseMatrix<double> sparse_train_matrix,
                                        size_t outcome_index,
