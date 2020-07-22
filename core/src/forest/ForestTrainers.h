@@ -39,6 +39,8 @@ ForestTrainer survival_trainer();
 
 ForestTrainer custom_trainer();
 
+ForestTrainer marginal_trainer();
+
 } // namespace grf
 
 #endif //GRF_FORESTTRAINERS_H

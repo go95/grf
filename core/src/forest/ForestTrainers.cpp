@@ -97,4 +97,14 @@ ForestTrainer custom_trainer() {
                        nullptr);
 }
 
+
+ForestTrainer marginal_trainer() {
+  std::unique_ptr<RelabelingStrategy> relabeling_strategy(new CustomRelabelingStrategy());
+  std::unique_ptr<SplittingRuleFactory> splitting_rule_factory(new RegressionSplittingRuleFactory());
+
+  return ForestTrainer(std::move(relabeling_strategy),
+                       std::move(splitting_rule_factory),
+                       nullptr);
+}
+
 } // namespace grf

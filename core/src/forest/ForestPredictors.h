@@ -24,6 +24,8 @@ namespace grf {
 
 ForestPredictor custom_predictor(uint num_threads);
 
+ForestPredictor marginal_predictor(uint num_threads);
+
 ForestPredictor instrumental_predictor(uint num_threads);
 
 ForestPredictor quantile_predictor(uint num_threads,
