@@ -36,10 +36,6 @@ bool CustomRelabelingStrategy::relabel(
   double total_effect = 0.0;
   std::vector<double> effects(number_of_outcomes);
 
-  for (size_t i = 0; i < number_of_outcomes; i++) {
-    total_outcome[i] = 0;
-  }
-
   for (size_t sample : samples) {
     total_treatment += data.get_treatment(sample);
   }
