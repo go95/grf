@@ -49,7 +49,7 @@ std::vector<double> CustomPredictionStrategy::predict(size_t sample,
     effects[(size_t) data.get_instrument(sample)] += data.get_outcome(sample) / denominator;
     total_effect += data.get_outcome(sample) / denominator;
   }
-  return effects[0] / total_effect;
+  return { effects[0] / total_effect };
 }
 
 std::vector<double> CustomPredictionStrategy::compute_variance(
