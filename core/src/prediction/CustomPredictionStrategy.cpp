@@ -27,7 +27,27 @@ std::vector<double> CustomPredictionStrategy::predict(size_t sample,
     const std::unordered_map<size_t, double>& weights_by_sample,
     const Data& train_data,
     const Data& data) const {
-  return { 0.0 };
+
+  size_t num_samples = samples.size();
+  double total_treatment = 0.0;
+  double effect_base = 0.0;
+  size_t number_of_outcomes = 2; // generalize // you CAN have custom prediction length // or query
+  double total_effect = 0.0;
+  std::vector<double> effects(number_of_outcomes);
+
+  for (size_t sample : samples) {
+    total_treatment += data.get_treatment(sample);
+  }
+
+  for (size_t sample : samples) {
+    double denominator = (
+      data.get_treatment(sample) * total_treatment -
+      (num_samples - total_treatment) * (1 - data.get_treatment(sample))
+    );
+    effects[(size_t) data.get_instrument(sample)] += data.get_outcome(sample) / denominator;
+    total_effect += data.get_outcome(sample) / denominator;
+  }
+  return effects[0] / total_effect;
 }
 
 std::vector<double> CustomPredictionStrategy::compute_variance(
